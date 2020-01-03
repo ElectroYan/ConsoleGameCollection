@@ -177,6 +177,7 @@ namespace Consoletris
                 list[k] = list[n];
                 list[n] = value;
             }
+            return list;
         }
 
     }
