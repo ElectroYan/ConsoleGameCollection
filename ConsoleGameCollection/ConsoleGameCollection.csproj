@@ -33,8 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Colorful.Console, Version=1.2.9.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Colorful.Console.1.2.9\lib\net461\Colorful.Console.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -43,9 +47,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Games\Chess.cs" />
+    <Compile Include="Games\Chess\Chess.cs" />
+    <Compile Include="Games\Consoletris\Blocks.cs" />
+    <Compile Include="Games\Consoletris\Consoletris.cs" />
+    <Compile Include="Games\Consoletris\Entities\Block.cs" />
+    <Compile Include="Games\Consoletris\Entities\Piece.cs" />
+    <Compile Include="Games\Consoletris\Entities\Vector.cs" />
     <Compile Include="Games\DealOrNoDeal.cs" />
-    <Compile Include="Games\Figures.cs" />
+    <Compile Include="Games\Chess\Figures.cs" />
     <Compile Include="Games\Minesweeper.cs" />
     <Compile Include="Games\Snake.cs" />
     <Compile Include="Games\TicTacToe.cs" />
@@ -55,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
