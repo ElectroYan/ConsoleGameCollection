@@ -170,10 +170,12 @@ namespace Snake
 			}
 			SetNewFruit();
 		}
+
 		public static void DrawAt(Pos pos, string ch = "██", ConsoleColor color = ConsoleColor.White)
 		{
 			DrawAt(pos.X * 2, pos.Y, ch, color);
 		}
+
 		public static void DrawAt(int x, int y, string ch = "██", ConsoleColor color = ConsoleColor.White)
 		{
 			Console.SetCursorPosition(x, y);
@@ -207,6 +209,7 @@ namespace Snake
 			}
 		}
 	}
+
 	class Pos
 	{
 		public int X;
@@ -215,6 +218,7 @@ namespace Snake
 		{
 
 		}
+
 		public Pos(int x, int y)
 		{
 			X = x;
@@ -228,10 +232,12 @@ namespace Snake
 			return false;
 		}
 	}
+
 	enum FieldType
 	{
 		Wall, Empty, Tail, Head, Fruit
 	}
+
 	enum Direction
 	{
 		Up, Left, Down, Right, Stop

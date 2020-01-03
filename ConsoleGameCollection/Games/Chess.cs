@@ -8,8 +8,10 @@ namespace Chess
 {
 	class Point
 	{
-		public int Row;public int Col;
+		public int Row;
+        public int Col;
 	}
+
 	class Chess
 	{
 		static readonly int FieldSize = 7;
@@ -83,6 +85,7 @@ namespace Chess
 			Console.BackgroundColor = ConsoleColor.Black;
 			Console.ForegroundColor = ConsoleColor.White;
 		}
+
 		private static void InitializeDefaultPlayfield()
 		{
 			Playfield = new Figure[,]

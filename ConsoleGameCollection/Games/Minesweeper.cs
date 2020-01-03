@@ -10,6 +10,7 @@ namespace Minesweeper
 	{
 		Number, Bomb
 	}
+
 	class Field
 	{
 		public FieldType Type;
@@ -23,6 +24,7 @@ namespace Minesweeper
 			Flagged = false;
 			Visible = false;
 		}
+
 		public Field(FieldType type, int value)
 		{
 			Type = type;
@@ -31,6 +33,7 @@ namespace Minesweeper
 			Visible = false;
 		}
 	}
+
 	public class Point
 	{
 		public int X;
@@ -42,6 +45,7 @@ namespace Minesweeper
 			Y = y;
 		}
 	}
+
 	class Minesweeper
 	{
 		public static Point cursor = new Point(0, 0);
@@ -58,6 +62,7 @@ namespace Minesweeper
 			{7, ConsoleColor.DarkRed},
 			{8, ConsoleColor.DarkMagenta}
 		};
+
 		public static int FieldWidth;
 		public static int FieldHeight;
 		public static Field[,] PlayField = new Field[10,20];

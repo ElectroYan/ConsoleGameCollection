@@ -16,6 +16,7 @@ namespace Chess
 		FBishop,
 		FPawn,
 	}
+
 	class Figure
 	{
 		public int ID;
@@ -23,6 +24,7 @@ namespace Chess
 		public int Value;
 		public bool[,] Icon;
 		public bool Color; //true = white;
+
 		public Figure(FigID id, bool color=true)
 		{
 			Color = color;
@@ -34,6 +36,7 @@ namespace Chess
 					Value = 0;
 					Icon = new bool[5, 12];
 						break;
+
 				case FigID.FKing:
 					ID = 1;
 					Symbol = 'K';
@@ -47,6 +50,7 @@ namespace Chess
 						{false,true ,true ,true ,true ,true ,true ,true ,true ,true ,true ,false,false },
 					};
 					break;
+
 				case FigID.FQueen:
 					ID = 2;
 					Symbol = 'Q';
@@ -60,6 +64,7 @@ namespace Chess
 						{false,false,true ,true ,true ,true ,true ,true ,true ,true ,false,false,false },
 					};
 					break;
+
 				case FigID.FRook:
 					ID = 3;
 					Symbol = 'R';
@@ -73,6 +78,7 @@ namespace Chess
 						{false,false,true ,true ,true ,true ,true ,true ,true ,true ,false,false},
 					};
 					break;
+
 				case FigID.FKnight:
 					ID = 4;
 					Symbol = 'N';
@@ -86,6 +92,7 @@ namespace Chess
 						{false,false,false,true ,true ,true ,true ,true ,true ,true ,true ,false},
 					};
 					break;
+
 				case FigID.FBishop:
 					ID = 5;
 					Symbol = 'B';
@@ -99,6 +106,7 @@ namespace Chess
 						{false,false,true ,true ,true ,true ,true ,true ,true ,true ,false,false},
 					};
 					break;
+
 				case FigID.FPawn:
 					ID = 6;
 					Symbol = 'P';
@@ -112,6 +120,7 @@ namespace Chess
 						{false,false,false,true ,true ,true ,true ,true ,true ,false,false,false},
 					};
 					break;
+
 				default:
 					break;
 			}

@@ -8,6 +8,7 @@ namespace TicTacToe
 		public T Row;
 		public T Col;
 	}
+
 	class TicTacToe
 	{
 		static int FieldSize = 3;
@@ -28,6 +29,7 @@ namespace TicTacToe
 			GameLoop();
 			Console.ReadKey();
 		}
+
 		static bool[,] vs = new bool[CellHeight, CellWidth / 2];
 
 		private static void GeneratePattern()
@@ -113,6 +115,7 @@ namespace TicTacToe
 				LastPlayer = !LastPlayer;
 			}
 		}
+
 		//┼, │, ─
 		//
 		//   │ O │
@@ -130,6 +133,7 @@ namespace TicTacToe
 					Console.WriteLine("\n" + new string('─', CellWidth) + '┼' + new string('─', CellWidth) + '┼' + new string('─', CellWidth));
 			}
 		}
+
 		private static void DrawCell(int x, int y)
 		{
 			Console.SetCursorPosition(y * CellWidth + 2 * y, x * CellHeight + x);
@@ -150,11 +154,11 @@ namespace TicTacToe
 			Console.BackgroundColor = ConsoleColor.Black;
 			Console.ForegroundColor = ConsoleColor.White;
 		}
+
 		private static void InvertColor()
 		{
 			Console.BackgroundColor = ConsoleColor.DarkBlue;
 			Console.ForegroundColor = ConsoleColor.DarkRed;
 		}
-
 	}
 }
