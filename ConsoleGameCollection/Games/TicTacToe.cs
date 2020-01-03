@@ -8,16 +8,17 @@ namespace TicTacToe
         public T Row;
         public T Col;
     }
+
     class TicTacToe
     {
-        static int FieldSize = 3;
-        static int[,] Playfield = new int[FieldSize, FieldSize];
-        static Point<int> Pos = new Point<int>() { Row = 0, Col = 0 };
-        //CellHeight Range 3-19
+        static readonly int FieldSize = 3;
+        static readonly int[,] Playfield = new int[FieldSize, FieldSize];
+        static readonly Point<int> Pos = new Point<int>() { Row = 0, Col = 0 };
+        // CellHeight Range 3-19
         static readonly int CellHeight = 11;
         static readonly int CellWidth = CellHeight * 2;
-        static bool[,] PatternX = new bool[CellHeight, CellWidth];
-        static bool[,] PatternO = new bool[CellHeight, CellWidth];
+        static readonly bool[,] PatternX = new bool[CellHeight, CellWidth];
+        static readonly bool[,] PatternO = new bool[CellHeight, CellWidth];
         static bool LastPlayer = true;
 
         public static void Start()
@@ -28,7 +29,8 @@ namespace TicTacToe
             GameLoop();
             Console.ReadKey();
         }
-        static bool[,] vs = new bool[CellHeight, CellWidth / 2];
+
+        static readonly bool[,] vs = new bool[CellHeight, CellWidth / 2];
 
         private static void GeneratePattern()
         {
@@ -43,11 +45,13 @@ namespace TicTacToe
                 it1 += 2;
                 it2 -= 2;
             }
+
             for (int i = 2; i < CellWidth - 2; i++)
             {
                 PatternO[0, i] = true;
                 PatternO[CellHeight - 1, i] = true;
             }
+
             for (int i = 1; i < CellHeight - 1; i++)
             {
                 PatternO[i, 1] = true;
@@ -93,26 +97,35 @@ namespace TicTacToe
             DrawCell(Pos.Row, Pos.Col);
             NormalColor();
             ConsoleKeyInfo consoleKey = Console.ReadKey();
+
             if (consoleKey.Key == ConsoleKey.LeftArrow && Pos.Col > 0)
                 Pos.Col--;
-            if (consoleKey.Key == ConsoleKey.RightArrow && Pos.Col < FieldSize-1)
+
+            if (consoleKey.Key == ConsoleKey.RightArrow && Pos.Col < FieldSize - 1)
                 Pos.Col++;
+
             if (consoleKey.Key == ConsoleKey.UpArrow && Pos.Row > 0)
                 Pos.Row--;
-            if (consoleKey.Key == ConsoleKey.DownArrow && Pos.Row < FieldSize-1)
+
+            if (consoleKey.Key == ConsoleKey.DownArrow && Pos.Row < FieldSize - 1)
                 Pos.Row++;
+
             if (consoleKey.Key == ConsoleKey.O && Playfield[Pos.Row, Pos.Col] == 0)
                 Playfield[Pos.Row, Pos.Col] = 1;
+
             if (consoleKey.Key == ConsoleKey.X && Playfield[Pos.Row, Pos.Col] == 0)
                 Playfield[Pos.Row, Pos.Col] = 2;
+
             if (consoleKey.Key == ConsoleKey.R)
                 Playfield[Pos.Row, Pos.Col] = 0;
+
             if (consoleKey.Key == ConsoleKey.Enter && Playfield[Pos.Row, Pos.Col] == 0)
             {
                 Playfield[Pos.Row, Pos.Col] = LastPlayer == true ? 2 : 1;
                 LastPlayer = !LastPlayer;
             }
         }
+
         //┼, │, ─
         //
         //   │ O │
@@ -130,6 +143,7 @@ namespace TicTacToe
                     Console.WriteLine("\n" + new string('─', CellWidth) + '┼' + new string('─', CellWidth) + '┼' + new string('─', CellWidth));
             }
         }
+
         private static void DrawCell(int x, int y)
         {
             Console.SetCursorPosition(y * CellWidth + 2 * y, x * CellHeight + x);
@@ -138,7 +152,7 @@ namespace TicTacToe
                 Console.SetCursorPosition(y * CellWidth + y, Console.CursorTop);
                 for (int l = 0; l < CellWidth; l++)
                     Console.Write(Playfield[x, y] == 0 ? " " : Playfield[x, y] == 1 ? (PatternO[k, l] == true ? "O" : " ") : PatternX[k, l] == true ? "X" : " ");
-                if (y < FieldSize-1)
+                if (y < FieldSize - 1)
                     Console.Write("│");
                 if (k < CellHeight - 1)
                     Console.Write("\n");
@@ -150,11 +164,11 @@ namespace TicTacToe
             Console.BackgroundColor = ConsoleColor.Black;
             Console.ForegroundColor = ConsoleColor.White;
         }
+
         private static void InvertColor()
         {
             Console.BackgroundColor = ConsoleColor.DarkBlue;
             Console.ForegroundColor = ConsoleColor.DarkRed;
         }
-
     }
 }

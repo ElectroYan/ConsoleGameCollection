@@ -11,12 +11,14 @@ namespace UltimateTicTacToe
         public T Row;
         public T Col;
     }
+
     class UltimateTicTacToe
     {
-        static int[,] Playfield = new int[9, 9];
-        static int[,] MainField = new int[3, 3];
-        static Point<int> Pos = new Point<int>() { Row = 0, Col = 0 };
-        //CellHeight Range 3-6
+        static readonly int[,] Playfield = new int[9, 9];
+        static readonly int[,] MainField = new int[3, 3];
+        static readonly Point<int> Pos = new Point<int>() { Row = 0, Col = 0 };
+
+        // CellHeight Range 3-6
         static readonly int CellHeight = 5;
         static readonly int CellWidth = CellHeight * 2;
         static readonly ConsoleColor FieldGridColor = ConsoleColor.Magenta;
@@ -37,6 +39,7 @@ namespace UltimateTicTacToe
                 Console.WindowHeight = CellHeight * 9 + 12;
                 Console.WindowWidth = CellWidth * 9 + 12;
             }
+
             PatternX = GeneratePattern(false, false);
             PatternXL = GeneratePattern(true, false);
             PatternO = GeneratePattern(false, true);
@@ -50,8 +53,9 @@ namespace UltimateTicTacToe
             int height = large ? CellHeight * 3 + 2 : CellHeight;
             int width = large ? CellWidth * 3 + 4 : CellWidth;
             int it1 = 0;
-            int it2 = width-1;
+            int it2 = width - 1;
             bool[,] vs = new bool[height, width];
+
             if (circle)
             {
                 for (int i = 2; i < width - 2; i++)
@@ -92,7 +96,7 @@ namespace UltimateTicTacToe
                 GetInput();
                 for (int x = 0; x < 3; x++)
                     for (int y = 0; y < 3; y++)
-                        MainField[x,y] = CheckWinner(x, y, false);
+                        MainField[x, y] = CheckWinner(x, y, false);
                 winner = CheckWinner();
             }
             Console.SetCursorPosition(0, CellHeight * 9 + 10);
@@ -105,16 +109,16 @@ namespace UltimateTicTacToe
             {
                 for (int y = 0; y < 9; y++)
                 {
-                    DrawCell(x,y);
+                    DrawCell(x, y);
                 }
-                if ((x+1)%3==0 && x<8)
-                    Console.Write("\n" + new string('═', CellWidth*3+2) + '╬' + new string('═', CellWidth*3+2) + '╬' + new string('═', CellWidth*3+2));
-                else if (x<8)
+                if ((x + 1) % 3 == 0 && x < 8)
+                    Console.Write("\n" + new string('═', CellWidth * 3 + 2) + '╬' + new string('═', CellWidth * 3 + 2) + '╬' + new string('═', CellWidth * 3 + 2));
+                else if (x < 8)
                 {
                     Console.Write("\n");
                     for (int i = 0; i < 3; i++)
                     {
-                        Console.Write( new string('─', CellWidth) + '┼' + new string('─', CellWidth) + '┼' + new string('─', CellWidth));
+                        Console.Write(new string('─', CellWidth) + '┼' + new string('─', CellWidth) + '┼' + new string('─', CellWidth));
                         if (i < 2)
                             Console.Write("║");
                     }
@@ -141,7 +145,8 @@ namespace UltimateTicTacToe
                             Console.ForegroundColor = FieldGridColor;
                             Console.BackgroundColor = ConsoleColor.Black;
                         }
-                        if (y%3 < 2)
+
+                        if (y % 3 < 2)
                         {
                             if (invert)
                             {
@@ -163,6 +168,7 @@ namespace UltimateTicTacToe
                             else
                                 Console.Write("║");
                         }
+
                         if (k < CellHeight - 1)
                             Console.Write("\n");
                     }
@@ -170,24 +176,45 @@ namespace UltimateTicTacToe
             }
         }
 
-        private static int CheckWinner(int x=0, int y=0, bool v=true)
+        private static int CheckWinner(int x = 0, int y = 0, bool v = true)
         {
             int[,] CheckField = v ? MainField : Playfield;
 
-            for (int i = x * 3; i < x * 3+3; i++)
-                if (CheckField[i, y * 3] != 0 && CheckField[i, y * 3] == CheckField[i, y*3+1] && CheckField[i, y * 3+1] == CheckField[i, y * 3+2])
+            for (int i = x * 3; i < x * 3 + 3; i++)
+                if (CheckField[i, y * 3] != 0
+                    && CheckField[i, y * 3] == CheckField[i, y * 3 + 1]
+                    && CheckField[i, y * 3 + 1] == CheckField[i, y * 3 + 2])
+                {
                     return CheckField[i, y * 3];
-            for (int i = y * 3; i < y*3+3; i++)
-                if (CheckField[x * 3, i] != 0 && CheckField[x * 3, i] == CheckField[x * 3+1, i] && CheckField[x * 3, i] == CheckField[x * 3+2, i])
+                }
+
+            for (int i = y * 3; i < y * 3 + 3; i++)
+                if (CheckField[x * 3, i] != 0
+                    && CheckField[x * 3, i] == CheckField[x * 3 + 1, i]
+                    && CheckField[x * 3, i] == CheckField[x * 3 + 2, i])
+                {
                     return CheckField[x * 3, i];
-            if (CheckField[x * 3, y * 3] != 0 && CheckField[x * 3, x * 3] == CheckField[x * 3+1, y * 3 +1] && CheckField[x * 3, y * 3] == CheckField[x * 3+2, y * 3+2])
+                }
+
+            if (CheckField[x * 3, y * 3] != 0
+                && CheckField[x * 3, x * 3] == CheckField[x * 3 + 1, y * 3 + 1]
+                && CheckField[x * 3, y * 3] == CheckField[x * 3 + 2, y * 3 + 2])
+            {
                 return CheckField[x * 3, y * 3];
-            if (CheckField[x * 3, y * 3 + 2] != 0 && CheckField[x * 3, y * 3+2] == CheckField[x * 3+1, y * 3+1] && CheckField[x * 3, y * 3+2] == CheckField[x * 3+2, y * 3])
-                return CheckField[x * 3, y * 3+2];
-            for (int i = x*3; i < x*3+3; i++)
-                for (int j = y*3; j < y*3+3; j++)
-                    if (CheckField[i,j] == 0)
+            }
+
+            if (CheckField[x * 3, y * 3 + 2] != 0
+                && CheckField[x * 3, y * 3 + 2] == CheckField[x * 3 + 1, y * 3 + 1]
+                && CheckField[x * 3, y * 3 + 2] == CheckField[x * 3 + 2, y * 3])
+            {
+                return CheckField[x * 3, y * 3 + 2];
+            }
+
+            for (int i = x * 3; i < x * 3 + 3; i++)
+                for (int j = y * 3; j < y * 3 + 3; j++)
+                    if (CheckField[i, j] == 0)
                         return 0;
+
             return 3;
 
         }
@@ -200,28 +227,48 @@ namespace UltimateTicTacToe
             NormalColor();
             Console.SetCursorPosition(0, CellHeight * 9 + 10);
             ConsoleKeyInfo consoleKey = Console.ReadKey();
+
             if (consoleKey.Key == ConsoleKey.A && Pos.Col > 0)
                 Pos.Col--;
+
             if (consoleKey.Key == ConsoleKey.D && Pos.Col < 8)
                 Pos.Col++;
+
             if (consoleKey.Key == ConsoleKey.W && Pos.Row > 0)
                 Pos.Row--;
+
             if (consoleKey.Key == ConsoleKey.S && Pos.Row < 8)
                 Pos.Row++;
-            if (consoleKey.Key == ConsoleKey.O && Playfield[Pos.Row, Pos.Col] == 0 && MainField[Pos.Row / 3, Pos.Col / 3] == 0)
+
+            if (consoleKey.Key == ConsoleKey.O
+                && Playfield[Pos.Row, Pos.Col] == 0
+                && MainField[Pos.Row / 3, Pos.Col / 3] == 0)
+            {
                 Playfield[Pos.Row, Pos.Col] = 1;
-            if (consoleKey.Key == ConsoleKey.I && Playfield[Pos.Row, Pos.Col] == 0 && MainField[Pos.Row / 3, Pos.Col / 3] == 0)
+            }
+
+            if (consoleKey.Key == ConsoleKey.I
+                && Playfield[Pos.Row, Pos.Col] == 0
+                && MainField[Pos.Row / 3, Pos.Col / 3] == 0)
+            {
                 Playfield[Pos.Row, Pos.Col] = 2;
+            }
+
             if (consoleKey.Key == ConsoleKey.R)
                 Playfield[Pos.Row, Pos.Col] = 0;
-            if (consoleKey.Key == ConsoleKey.Enter && Playfield[Pos.Row, Pos.Col] == 0 && MainField[Pos.Row / 3, Pos.Col / 3] == 0)
+
+            if (consoleKey.Key == ConsoleKey.Enter
+                && Playfield[Pos.Row, Pos.Col] == 0
+                && MainField[Pos.Row / 3, Pos.Col / 3] == 0)
             {
                 Playfield[Pos.Row, Pos.Col] = LastPlayer == true ? 2 : 1;
                 LastPlayer = !LastPlayer;
             }
+
             DrawCell(prev.Row, prev.Col);
             Console.SetCursorPosition(0, CellHeight * 9 + 10);
         }
+
         //┼, │, ─
         //
         //   │ O │
@@ -229,12 +276,13 @@ namespace UltimateTicTacToe
         // O │ O │
         //───┼───┼───
         // X │ X │ X
-        
+
 
         private static void NormalColor()
         {
             Console.BackgroundColor = ConsoleColor.Black;
         }
+
         private static void InvertColor()
         {
             Console.BackgroundColor = ConsoleColor.DarkBlue;

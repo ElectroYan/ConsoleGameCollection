@@ -4,47 +4,71 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DealOrNoDeal
-{
-    class Briefcase
-    {
+namespace DealOrNoDeal {
+    class Briefcase {
         public int Number;
         public bool Available;
         public bool IsMainBriefcase = false;
         public int Value;
     }
-    class DealOrNoDeal
-    {
-        static List<int> Values = new List<int> { 1, 5, 10, 15, 25, 50, 75, 100, 200, 300, 400, 500, 750, 1000, 5000, 10000, 25000, 50000, 75000, 100000, 200000, 300000, 400000, 500000, 750000, 1000000 };
-        static List<Briefcase> Briefcases = new List<Briefcase>();
+
+    class DealOrNoDeal {
+        static readonly List<int> Values = new List<int> {
+            1,
+            5,
+            10,
+            15,
+            25,
+            50,
+            75,
+            100,
+            200,
+            300,
+            400,
+            500,
+            750,
+            1000,
+            5000,
+            10000,
+            25000,
+            50000,
+            75000,
+            100000,
+            200000,
+            300000,
+            400000,
+            500000,
+            750000,
+            1000000
+        };
+
+        static readonly List<Briefcase> Briefcases = new List<Briefcase>();
         static int DrawsLeftTot = 7;
         static int DrawsLeft = DrawsLeftTot;
-        public static void Start()
-        {
+        public static void Start() {
             InitializeBriefcases();
             GameLoop();
         }
 
-        private static void GameLoop()
-        {
+        private static void GameLoop() {
             foreach (var item in Briefcases)
-            {
                 Console.WriteLine(item.Number + " " + item.Value);
-            }
+
             int winValue = 0;
+
             while (winValue == 0)
             {
                 DrawField();
                 GetUserInput();
                 winValue = PhonePerson();
             }
+
             Console.WriteLine("You won: " + winValue);
             Console.ReadKey();
         }
 
-        private static void SelectFirstBriefcase()
-        {
-            if (Briefcases.Select(x=>x.IsMainBriefcase).Max() == false)
+        private static void SelectFirstBriefcase() {
+            if (Briefcases.Select(x => x.IsMainBriefcase).Max() == false)
             {
                 Console.Write("Choose case: ");
                 Briefcases[GetNumber()].IsMainBriefcase = true;
@@ -52,8 +76,7 @@ namespace DealOrNoDeal
             }
         }
 
-        private static int PhonePerson()
-        {
+        private static int PhonePerson() {
             DrawField();
             Console.ForegroundColor = ConsoleColor.White;
             int offer = 0;
@@ -77,11 +100,11 @@ namespace DealOrNoDeal
                 Console.Write("Select one of the remaining cases: ");
                 offer = Briefcases[GetNumber(true)].Value;
             }
+
             return offer;
         }
 
-        private static void GetUserInput()
-        {
+        private static void GetUserInput() {
             Console.ForegroundColor = ConsoleColor.White;
             SelectFirstBriefcase();
             Console.ForegroundColor = ConsoleColor.White;
@@ -92,33 +115,25 @@ namespace DealOrNoDeal
             DrawsLeft--;
         }
 
-        private static int GetNumber(bool allowMain = false)
-        {
-            int value = 0;
+        private static int GetNumber(bool allowMain = false) {
+            int value;
+
             try
             {
                 int a = int.Parse(Console.ReadLine());
                 if (allowMain)
                 {
                     if (Briefcases[a - 1].Available)
-                    {
                         value = a - 1;
-                    }
                     else
-                    {
                         value = GetNumber(allowMain);
-                    }
                 }
                 else
                 {
-                    if (Briefcases[a-1].Available && Briefcases[a-1].IsMainBriefcase == false)
-                    {
-                        value = a-1;
-                    }
+                    if (Briefcases[a - 1].Available && Briefcases[a - 1].IsMainBriefcase == false)
+                        value = a - 1;
                     else
-                    {
                         value = GetNumber(allowMain);
-                    }
 
                 }
             }
@@ -126,13 +141,14 @@ namespace DealOrNoDeal
             {
                 value = GetNumber(allowMain);
             }
+
             return value;
         }
 
-        private static void DrawField()
-        {
+        private static void DrawField() {
             Console.Clear();
-            //values
+
+            // Values
             Briefcases.Sort((x, y) => x.Value.CompareTo(y.Value));
             for (int i = 0; i < Briefcases.Count(); i++)
             {
@@ -141,27 +157,26 @@ namespace DealOrNoDeal
                 Console.WriteLine(Briefcases[i].Value + "");
                 Console.ForegroundColor = Briefcases[i].Available == false ? ConsoleColor.Yellow : ConsoleColor.DarkGray;
             }
-            //numbers / IDS
+
+            // Numbers / IDs
             Briefcases.Sort((x, y) => x.Number.CompareTo(y.Number));
             for (int i = 0; i < Briefcases.Count(); i++)
             {
-                Console.SetCursorPosition(Briefcases.Select(x => x.Value).Max().ToString().Length+5 + Briefcases.Select(x => x.Number).Max().ToString().Length- Briefcases[i].Number.ToString().Length, i);
+                Console.SetCursorPosition(Briefcases.Select(x => x.Value).Max().ToString().Length + 5 + Briefcases.Select(x => x.Number).Max().ToString().Length - Briefcases[i].Number.ToString().Length, i);
                 Console.ForegroundColor = Briefcases[i].Available == true && Briefcases[i].IsMainBriefcase == false ? ConsoleColor.Red : Briefcases[i].IsMainBriefcase == true ? ConsoleColor.Green : ConsoleColor.DarkGray;
                 Console.WriteLine(Briefcases[i].Number + "");
                 Console.ForegroundColor = Briefcases[i].Available == false ? ConsoleColor.Red : ConsoleColor.DarkGray;
             }
         }
 
-        private static void InitializeBriefcases()
-        {
+        private static void InitializeBriefcases() {
             int count = Values.Count();
             int[] randomized = GenerateRandomizedList(count);
             for (int i = 0; i < count; i++)
-                Briefcases.Add(new Briefcase() { Number = (i+1), Available = true, Value = randomized[i] });
+                Briefcases.Add(new Briefcase() { Number = (i + 1), Available = true, Value = randomized[i] });
         }
 
-        private static int[] GenerateRandomizedList(int count)
-        {
+        private static int[] GenerateRandomizedList(int count) {
             Random random = new Random();
             int[] rngvalues = new int[count];
             for (int i = 0; i < count; i++)
