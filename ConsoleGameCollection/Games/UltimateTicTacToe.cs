@@ -14,10 +14,11 @@ namespace UltimateTicTacToe
 
 	class UltimateTicTacToe
 	{
-		static int[,] Playfield = new int[9, 9];
-		static int[,] MainField = new int[3, 3];
-		static Point<int> Pos = new Point<int>() { Row = 0, Col = 0 };
-		//CellHeight Range 3-6
+		static readonly int[,] Playfield = new int[9, 9];
+		static readonly int[,] MainField = new int[3, 3];
+		static readonly Point<int> Pos = new Point<int>() { Row = 0, Col = 0 };
+
+		// CellHeight Range 3-6
 		static readonly int CellHeight = 5;
 		static readonly int CellWidth = CellHeight * 2;
 		static readonly ConsoleColor FieldGridColor = ConsoleColor.Magenta;
@@ -38,6 +39,7 @@ namespace UltimateTicTacToe
 				Console.WindowHeight = CellHeight * 9 + 12;
 				Console.WindowWidth = CellWidth * 9 + 12;
 			}
+
 			PatternX = GeneratePattern(false, false);
 			PatternXL = GeneratePattern(true, false);
 			PatternO = GeneratePattern(false, true);
