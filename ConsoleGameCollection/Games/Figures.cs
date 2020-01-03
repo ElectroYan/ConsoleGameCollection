@@ -4,8 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Chess {
-    public enum FigID {
+namespace Chess
+{
+    public enum FigID
+    {
         Nothing,
         FKing,
         FQueen,
@@ -15,14 +17,16 @@ namespace Chess {
         FPawn,
     }
 
-    class Figure {
+    class Figure
+    {
         public int ID;
         public char Symbol;
         public int Value;
         public bool[,] Icon;
         public bool Color; //true = white;
 
-        public Figure(FigID id, bool color = true) {
+        public Figure(FigID id, bool color = true)
+        {
             Color = color;
             switch (id)
             {
@@ -121,22 +125,28 @@ namespace Chess {
                     break;
             }
         }
-        public void FKing() {
+        public void FKing()
+        {
 
         }
-        public void FQueen() {
+        public void FQueen()
+        {
 
         }
-        public void FRook() {
+        public void FRook()
+        {
 
         }
-        public void FKnight() {
+        public void FKnight()
+        {
 
         }
-        public void FBishop() {
+        public void FBishop()
+        {
 
         }
-        public void FPawn() {
+        public void FPawn()
+        {
 
         }
 

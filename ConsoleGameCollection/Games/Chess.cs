@@ -76,6 +76,7 @@ namespace Chess
                 for (int i = 0; i < FieldColumns; i++)
                 {
                     for (int k = 0; k < FieldSize; k++)
+                    {
                         for (int l = 0; l < FieldSize * 2; l++)
                         {
                             Console.SetCursorPosition(i * FieldSize * 2 + l, j * FieldSize + k);
@@ -94,6 +95,7 @@ namespace Chess
                                 Console.Write(" ");
                             }
                         }
+                    }
                     Console.WriteLine();
                 }
             }
@@ -174,7 +176,7 @@ namespace Chess
                     new Figure((FigID)6, true),
                     new Figure((FigID)6, true),
                     new Figure((FigID)6, true)
-                
+
                 },
                 {
                     new Figure((FigID)3, true),
@@ -186,7 +188,7 @@ namespace Chess
                     new Figure((FigID)4, true),
                     new Figure((FigID)3, true)
                 }
-                               
+
             };
         }
     }

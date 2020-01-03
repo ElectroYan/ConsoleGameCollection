@@ -13,7 +13,8 @@ namespace DealOrNoDeal {
     }
 
     class DealOrNoDeal {
-        static readonly List<int> Values = new List<int> { 1,
+        static readonly List<int> Values = new List<int> {
+            1,
             5,
             10,
             15,

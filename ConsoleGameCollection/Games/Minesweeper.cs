@@ -106,8 +106,8 @@ namespace Minesweeper
 
             if (x < FieldWidth - 1
                 && PlayField[x + 1, y].Visible == false)
-            { 
-                OpenField(x + 1, y); 
+            {
+                OpenField(x + 1, y);
             }
 
             if (y < FieldHeight - 1
